@@ -32,7 +32,7 @@ class LoopUpscaler:
         self.iter_images = None
         self.images_list = []
         self.default_args = None
-        self.show_log = plaintext_to_html("", classname="comments")
+        self.show_log = plaintext_to_html("")
         self._init_data()
 
     def _init_data(self):
