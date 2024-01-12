@@ -105,37 +105,37 @@ def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as ui_component:
 
         with gr.Row(visible=False):
-            id_task = gr.Textbox(visible=True, elem_id=f"{self_type}_id_task", value="", label="任务id")
+            id_task = gr.Textbox(visible=True, elem_id=f"{self_type}_id_task", value="", label="Task ID")
             process_count = gr.Number(
-                visible=True, elem_id=f"{self_type}_process_count", show_label=False, info="总任务数", value=0
+                visible=True, elem_id=f"{self_type}_process_count", show_label=False, info="Process Count", value=0
             )
             process_curr = gr.Number(
-                visible=True, elem_id=f"{self_type}_process_curr", show_label=False, info="当前任务", value=0
+                visible=True, elem_id=f"{self_type}_process_curr", show_label=False, info="Current Process", value=0
             )
 
         with gr.Row():
             input_floder = gr.Textbox(
                 placeholder="",
-                label="输入目录", autofocus=True,
+                label="Iput directory", autofocus=True,
             )
         with gr.Row():
             output_floder = gr.Textbox(
                 placeholder="",
-                label="输出目录"
+                label="Ouput directory"
             )
 
         with gr.Row():
             with FormRow():
                 select_upscaler = gr.Dropdown(
-                    label='放大算法', elem_id="select_upscaler", choices=[x.name for x in shared.sd_upscalers],
+                    label='Select Upscaler', elem_id="select_upscaler", choices=[x.name for x in shared.sd_upscalers],
                     value=shared.sd_upscalers[0].name
                 )
                 select_upscaler_visibility = gr.Slider(
-                    minimum=1.0, maximum=4.0, step=0.5, label="放大倍数", value=1.5,
+                    minimum=1.0, maximum=4.0, step=0.5, label="Upscaler Strengh", value=1.5,
                     elem_id="select_upscaler_visibility"
                 )
                 redraw_amplitude = gr.Slider(
-                    minimum=0.0, maximum=1.0, step=0.01, label="重绘幅度", value=0.35, elem_id="redraw_amplitude"
+                    minimum=0.0, maximum=1.0, step=0.01, label="Upscaler Weight", value=0.35, elem_id="redraw_amplitude"
                 )
 
         with gr.Row():
@@ -143,19 +143,19 @@ def on_ui_tabs():
                 out_gallery, generation_info, html_info, html_log = create_output_panel(self_type)
             with gr.Column(elem_id=f"{self_type}_console"):
                 start_btn = gr.Button(
-                    value="开始", variant='primary', elem_id=f"{self_type}_start_btn", label='start_btn',
+                    value="Start", variant='primary', elem_id=f"{self_type}_start_btn", label='start_btn',
                 )
                 end_btn = gr.Button(
-                    value="终止", variant='secondary', elem_id=f"{self_type}_end_btn", label='end_btn', visible=False
+                    value="Abort", variant='secondary', elem_id=f"{self_type}_end_btn", label='end_btn', visible=False
                 )
                 process_btn = gr.Button(
-                    value="处理", variant='secondary', elem_id=f"{self_type}_process_btn", label='process_btn',
+                    value="Processing", variant='secondary', elem_id=f"{self_type}_process_btn", label='process_btn',
                     visible=False
                 )
 
         bind_func(start_btn, end_btn)
 
-        return [(ui_component, "自动高清修复", "auto_upscaler_tab")]
+        return [(ui_component, "Auto Upscaler", "auto_upscaler_tab")]
 
 
 script_callbacks.on_ui_tabs(on_ui_tabs)
